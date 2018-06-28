@@ -35,7 +35,7 @@ SudokuField::SudokuField(std::string filename)	// fills in the sudoku field from
     fileIn(filename);
 }
 
-short SudokuField::operator()(int x, int y)		// returns the value of the sudoku field at position (x,y)
+short SudokuField::operator()(int x, int y)	// returns the value of the sudoku field at position (x,y)
 {
     short nOut = 0;
     for (int i = 0; i < 9; i++) {
@@ -52,7 +52,7 @@ short SudokuField::operator()(int x, int y)		// returns the value of the sudoku 
     return nOut;
 }
 
-void SudokuField::print()						// prints the current state in a readable manner to console
+void SudokuField::print()			// prints the current state in a readable manner to console
 {
     using namespace std;
     cout << endl;
@@ -78,7 +78,8 @@ void SudokuField::print()						// prints the current state in a readable manner 
     cout << endl;
 }
 
-void SudokuField::fileOut(std::string filename, bool readable)
+void SudokuField::fileOut(std::string filename, bool readable)	// writes the current sudoku field into a file, either with full information
+								// or with reduced information but human readable
 {
     using namespace std;
     ofstream outf(filename);
@@ -111,7 +112,7 @@ void SudokuField::fileOut(std::string filename, bool readable)
     cout << "Writing to file: " + filename << endl;
 }
 
-void SudokuField::fileIn(std::string filename)
+void SudokuField::fileIn(std::string filename)	// loads the sudoku field from a file
 {
     using namespace std;
     if (filename == "NULL") {
@@ -152,7 +153,7 @@ void SudokuField::fileIn(std::string filename)
     print();
 }
 
-bool SudokuField::solveStep()
+bool SudokuField::solveStep()		// performs on solution step, returns false if nothing changed during this step
 {
     bool keepSolving = false;
     // Ausschluss-Verfahren
@@ -253,7 +254,7 @@ bool SudokuField::solveStep()
     return keepSolving;	// returns false if there was no change during this solution step
 }
 
-bool SudokuField::checkField()
+bool SudokuField::checkField()		// checks if the current sudoku field follows the given sudoku rules
 {
     using namespace std;
     for (int y = 0; y < 9; y++) {		// checks rows for numbers appearing more than once
@@ -295,7 +296,7 @@ bool SudokuField::checkField()
     return true;
 }
 
-bool SudokuField::solve()
+bool SudokuField::solve()		// tries to solve the sudoku using logical conclusions and brute force, if not possible
 {
     using namespace std;
     while (solveStep());        	// normal procedure until it doesn't work anymore
